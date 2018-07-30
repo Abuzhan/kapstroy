@@ -1,0 +1,80 @@
+<%#-- copyright
+OpenProject is a project management system.
+Copyright (C) 2012-2017 the OpenProject Foundation (OPF)
+
+This program is free software; you can redistribute it and/or
+modify it under the terms of the GNU General Public License version 3.
+
+OpenProject is a fork of ChiliProject, which is a fork of Redmine. The copyright follows:
+Copyright (C) 2006-2017 Jean-Philippe Lang
+Copyright (C) 2010-2013 the ChiliProject Team
+
+This program is free software; you can redistribute it and/or
+modify it under the terms of the GNU General Public License
+as published by the Free Software Foundation; either version 2
+of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program; if not, write to the Free Software
+Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+
+See doc/COPYRIGHT.rdoc for more details.
+
+++#%>
+
+<%= styled_form_tag({ action: 'edit', tab: 'users' }, class: 'admin-settings--form') do %>
+
+  <div class ="form--section">
+    <div class="form--field">
+      <%= setting_check_box :users_deletable_by_admins %>
+    </div>
+
+    <div class="form--field">
+      <%= setting_check_box :users_deletable_by_self %>
+    </div>
+  </div>
+
+  <fieldset class="form--fieldset">
+    <fieldset id="consent_settings" class="form--fieldset">
+      <legend class="form--fieldset-legend"><%= I18n.t(:label_consent_settings) %></legend>
+
+      <div class="form--field">
+        <%= setting_check_box :consent_required %>
+      </div>
+
+      <%= cell Settings::TextSettingCell, I18n.locale, name: "consent_info" %>
+
+      <div class="form--field">
+        <%= setting_block("consent_time") do %>
+          <span class="form--check-box-field-container -slim">
+            <input type="hidden" name="settings[consent_time]" disabled id="settings_consent_time">
+            <%= check_box_tag 'toggle_consent_time',
+                              '1',
+                              !Setting.consent_time.present?,
+                              id: 'toggle_consent_time' %>
+          </span>
+        <% end %>
+        <div class="form--field-instructions">
+          <%= I18n.t('consent.text_update_consent_time') %>
+          <br/>
+          <strong>
+            <%= I18n.t('consent.update_consent_last_time',
+                       update_time: Setting.consent_time.present? ? format_time(Setting.consent_time) : t(:label_never)) %>
+          </strong>
+        </div>
+      </div>
+      <div class="form--field">
+        <%= setting_text_field :consent_decline_mail, size: 6, container_class: '-middle' %>
+        <span class="form--field-instructions">
+          <%= t('consent.contact_mail_instructions') %>
+        </span>
+      </div>
+    </fieldset>
+  </fieldset>
+  <%= styled_button_tag l(:button_save), class: '-highlight -with-icon icon-checkmark' %>
+<% end %>
