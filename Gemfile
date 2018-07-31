@@ -36,6 +36,9 @@ gem 'activerecord-session_store', '~> 1.1.0'
 gem 'rails', '~> 5.0.6'
 gem 'responders', '~> 2.4'
 
+gem "openproject-backlogs", git: "https://github.com/finnlabs/openproject-backlogs.git", :branch => 'stable/7'
+gem "openproject-pdf_export", git: "https://github.com/finnlabs/openproject-pdf_export.git", :branch => 'stable/7'
+
 gem 'coderay', '~> 1.1.2'
 gem 'rubytree', git: 'https://github.com/dr0verride/RubyTree.git', ref: '06f53ee'
 gem 'rdoc', '>= 2.4.2'
