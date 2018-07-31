@@ -1,0 +1,14 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  host: localhost
+  username: kapstroy
+  password: qwerty123456
+
+development:
+  <<: *default
+  database: kapstroy_db
+
+test:
+  <<: *default
+  database: kapstroy_test
