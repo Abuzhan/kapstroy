@@ -260,7 +260,7 @@ platforms :mri, :mingw, :x64_mingw do
 end
 
 group :opf_plugins do
-  gem 'openproject-translations', git: 'https://github.com/opf/openproject-translations.git', branch: 'dev'
+  gem 'openproject-translations', git: 'https://github.com/opf/openproject-translations.git', branch: 'translations-in-core'
 end
 
 group :docker, optional: true do
