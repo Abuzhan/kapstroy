@@ -97,8 +97,177 @@ class ProjectsController < ApplicationController
     @types = ::Type.all
     @project = Project.new
     @project.attributes = permitted_params.project
+    project_save_success = false
 
-    if validate_parent_id && @project.save
+    project_start_date = Date.strptime(params['project']['custom_field_values']['14'], '%Y-%m-%d')
+    project_end_date = Date.strptime(params['project']['custom_field_values']['15'], '%Y-%m-%d')
+
+    if validate_start_date_before_effective_date_for_version(project_start_date, project_end_date)
+      if @project.save
+        project_save_success = true
+      end
+    else
+      flash[:error] = "Invalid Dates"
+    end
+
+    
+    if params['project'].has_key?('parent_id') && project_save_success
+      if params['project']['parent_id'] != ""
+        
+        version_save_success = false
+
+        version_model = ActionController::Parameters.new({
+                  version: {
+                    status: "open",
+                    sharing: "none"
+                }
+            })
+
+        #Creating decades for first month of contract
+        if project_start_date.mday < 11
+          decs_in_first = 3
+
+          dec_name1 = "Декада 1"
+          dec_name2 = "Декада 2"
+          dec_name3 = "Декада 3"
+
+          start_date1 = project_start_date.at_beginning_of_month
+          start_date2 = start_date1 + 10
+          start_date3 = start_date2 + 10
+
+          effective_date1 = start_date1 + 9
+          effective_date2 = start_date2 + 9
+          effective_date3 = project_start_date.at_beginning_of_month.next_month - 1
+
+          permitted1 = version_model.require(:version).permit([:status, :sharing]).merge(name: dec_name1, effective_date: effective_date1, start_date: start_date1, project_id: @project.id)
+          permitted2 = version_model.require(:version).permit([:status, :sharing]).merge(name: dec_name2, effective_date: effective_date2, start_date: start_date2, project_id: @project.id)
+          permitted3 = version_model.require(:version).permit([:status, :sharing]).merge(name: dec_name3, effective_date: effective_date3, start_date: start_date3, project_id: @project.id)
+
+          version_save_success = create_version(permitted1)
+          version_save_success = create_version(permitted2)
+          version_save_success = create_version(permitted3)
+
+        elsif project_start_date.mday < 21
+          decs_in_first = 2
+          
+          dec_name1 = "Декада 1"
+          dec_name2 = "Декада 2"
+          
+          start_date1 = project_start_date.at_beginning_of_month + 10
+          start_date2 = start_date1 + 10
+          
+          effective_date1 = start_date1 + 9
+          effective_date2 = project_start_date.at_beginning_of_month.next_month - 1
+          
+          permitted1 = version_model.require(:version).permit([:status, :sharing]).merge(name: dec_name1, effective_date: effective_date1, start_date: start_date1, project_id: @project.id)
+          permitted2 = version_model.require(:version).permit([:status, :sharing]).merge(name: dec_name2, effective_date: effective_date2, start_date: start_date2, project_id: @project.id)
+          
+          version_save_success = create_version(permitted1)
+          version_save_success = create_version(permitted2)
+
+        else
+          decs_in_first = 1
+
+          dec_name1 = "Декада 1"
+          start_date1 = project_start_date.at_beginning_of_month + 20
+          effective_date1 = project_start_date.at_beginning_of_month.next_month - 1
+          permitted1 = version_model.require(:version).permit([:status, :sharing]).merge(name: dec_name1, effective_date: effective_date1, start_date: start_date1, project_id: @project.id)
+          version_save_success = create_version(permitted1)
+
+        end
+
+        #Declaring some constants before generating rest of decades
+        months_between = (project_end_date.year*12 + project_end_date.month) - (project_start_date.year*12 + project_start_date.month) - 1
+        total_decades_so_far = decs_in_first + months_between * 3
+        decade_counter = decs_in_first + 1
+        month_var = project_start_date
+
+        #Loop for creating decades for every middle month
+        for i in 1..months_between
+          version_model = ActionController::Parameters.new({
+                  version: {
+                    status: "open",
+                    sharing: "none"
+                }
+            })
+  
+          dec_name1 = "Декада " + decade_counter.to_s
+          dec_name2 = "Декада " + (decade_counter+1).to_s
+          dec_name3 = "Декада " + (decade_counter+2).to_s
+
+          start_date1 = month_var.at_beginning_of_month.next_month
+          start_date2 = start_date1 + 10
+          start_date3 = start_date2 + 10
+          
+          effective_date1 = start_date1 + 9
+          effective_date2 = start_date2 + 9
+          effective_date3 = month_var.at_beginning_of_month.next_month.next_month - 1
+
+          permitted1 = version_model.require(:version).permit([:status, :sharing]).merge(name: dec_name1, effective_date: effective_date1, start_date: start_date1, project_id: @project.id)
+          version_save_success = create_version(permitted1)
+
+          permitted2 = version_model.require(:version).permit([:status, :sharing]).merge(name: dec_name2, effective_date: effective_date2, start_date: start_date2, project_id: @project.id)
+          version_save_success = create_version(permitted2)
+
+          permitted3 = version_model.require(:version).permit([:status, :sharing]).merge(name: dec_name3, effective_date: effective_date3, start_date: start_date3, project_id: @project.id)
+          version_save_success = create_version(permitted3)
+
+          month_var = month_var.next_month
+          decade_counter += 3
+        end
+
+        #Creating decades for last month of contract
+        if project_end_date.mday < 11
+
+          dec_name1 = "Декада " + (total_decades_so_far+1).to_s
+          start_date1 = project_end_date.at_beginning_of_month
+          effective_date1 = start_date1 + 9
+          permitted1 = version_model.require(:version).permit([:status, :sharing]).merge(name: dec_name1, effective_date: effective_date1, start_date: start_date1, project_id: @project.id)
+          version_save_success = create_version(permitted1)
+
+        elsif project_end_date.mday < 21
+
+          dec_name1 = "Декада " + (total_decades_so_far+1).to_s
+          dec_name2 = "Декада " + (total_decades_so_far+2).to_s
+          
+          start_date1 = project_end_date.at_beginning_of_month
+          start_date2 = start_date1 + 10
+          
+          effective_date1 = start_date1 + 9
+          effective_date2 = start_date2 + 9
+          
+          permitted1 = version_model.require(:version).permit([:status, :sharing]).merge(name: dec_name1, effective_date: effective_date1, start_date: start_date1, project_id: @project.id)
+          permitted2 = version_model.require(:version).permit([:status, :sharing]).merge(name: dec_name2, effective_date: effective_date2, start_date: start_date2, project_id: @project.id)
+          
+          version_save_success = create_version(permitted1)
+          version_save_success = create_version(permitted2)
+
+        else
+
+          dec_name1 = "Декада " + (total_decades_so_far+1).to_s
+          dec_name2 = "Декада " + (total_decades_so_far+2).to_s
+          dec_name3 = "Декада " + (total_decades_so_far+3).to_s
+          
+          start_date1 = project_end_date.at_beginning_of_month
+          start_date2 = start_date1 + 10
+          start_date3 = start_date2 + 10
+          
+          effective_date1 = start_date1 + 9
+          effective_date2 = start_date2 + 9
+          effective_date3 = project_end_date.at_beginning_of_month.next_month - 1
+          
+          permitted1 = version_model.require(:version).permit([:status, :sharing]).merge(name: dec_name1, effective_date: effective_date1, start_date: start_date1, project_id: @project.id)
+          permitted2 = version_model.require(:version).permit([:status, :sharing]).merge(name: dec_name2, effective_date: effective_date2, start_date: start_date2, project_id: @project.id)
+          permitted3 = version_model.require(:version).permit([:status, :sharing]).merge(name: dec_name3, effective_date: effective_date3, start_date: start_date3, project_id: @project.id)
+
+          version_save_success = create_version(permitted1)
+          version_save_success = create_version(permitted2)
+          version_save_success = create_version(permitted3)
+        end
+      end
+    end
+
+    if validate_parent_id && project_save_success && version_save_success
       @project.set_allowed_parent!(params['project']['parent_id']) if params['project'].has_key?('parent_id')
       add_current_user_to_project_if_not_admin(@project)
       respond_to do |format|
@@ -111,6 +280,25 @@ class ProjectsController < ApplicationController
       respond_to do |format|
         format.html do render action: 'new' end
       end
+    end
+
+  end
+
+  def validate_start_date_before_effective_date_for_version(start_date, effective_date)
+    if effective_date && start_date && effective_date < start_date
+      return false
+    else
+      return true
+    end
+  end
+
+  def create_version(permitted)
+    @version = @project.versions.build
+    @version.attributes = permitted
+    if @version.save
+      return true
+    else
+      return false
     end
   end
 
