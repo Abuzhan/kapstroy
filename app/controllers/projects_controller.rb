@@ -98,6 +98,7 @@ class ProjectsController < ApplicationController
     @project = Project.new
     @project.attributes = permitted_params.project
     project_save_success = false
+    version_save_success = true
 
     project_start_date = Date.strptime(params['project']['custom_field_values']['14'], '%Y-%m-%d')
     project_end_date = Date.strptime(params['project']['custom_field_values']['15'], '%Y-%m-%d')
@@ -107,14 +108,14 @@ class ProjectsController < ApplicationController
         project_save_success = true
       end
     else
-      flash[:error] = "Invalid Dates"
+      flash.now[:error] = "Invalid Dates"
     end
 
     
     if params['project'].has_key?('parent_id') && project_save_success
       if params['project']['parent_id'] != ""
         
-        version_save_success = false
+        
 
         version_model = ActionController::Parameters.new({
                   version: {
