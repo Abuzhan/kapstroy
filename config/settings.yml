@@ -60,7 +60,7 @@ additional_footer_content:
   default: ''
 # The instance name
 app_title:
-  default: KAPSTROY
+  default: ИС КапСтрой
 app_subtitle:
   default: Project management
 brute_force_block_minutes:
@@ -124,7 +124,7 @@ password_days_valid:
   format: int
   default: 0
 software_name:
-  default: KAPSTROY
+  default: ИС КапСтрой
 software_url:
   default: 'https://www.openproject.org/'
 attachment_max_size:

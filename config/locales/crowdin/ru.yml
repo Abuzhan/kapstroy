@@ -1308,7 +1308,7 @@ ru:
   label_information_plural: Информация
   label_integer: Целое число
   label_internal: Внутренние
-  label_invite_user: Пригласить пользователя
+  label_invite_user: Добавить ресурс
   label_show_hide: Показать/скрыть
   label_show_all_registered_users: Показать всех зарегистрированных пользователей
   label_journal: Журнал
@@ -1436,7 +1436,7 @@ ru:
   label_project_default_type: Разрешить пустой тип
   label_project_hierarchy: Иерархия проектов
   label_project_new: Новый проект
-  label_project_plural: Проекты
+  label_project_plural: Программы
   label_project_settings: Настройки проекта
   label_projects_storage_information: "%{count} проектов используют %{storage} дискового
     пространства"
@@ -1559,7 +1559,7 @@ ru:
   label_user_mail_option_only_owner: Только для тех, которыми я владею
   label_user_mail_option_selected: Для любого события, но только для выбранных проектов
   label_user_new: Новый пользователь
-  label_user_plural: Пользователи
+  label_user_plural: Ресурсы
   label_user_search: Найти пользователя
   label_version_new: Новый этап
   label_version_plural: Этапы
