@@ -1065,8 +1065,8 @@ ru:
   gui_validation_error_plural: "%{count} ошибок"
   homescreen:
     additional:
-      projects: Новые видимые проекты в данном экземпляре.
-      users: Новые зарегистрированные пользователи в данном экземпляре.
+      projects: Новые видимые программы в данном экземпляре.
+      users: Новые зарегистрированные ресурсы в данном экземпляре.
     blocks:
       community: OpenProject сообщество
       upsale:
@@ -1437,10 +1437,11 @@ ru:
   label_project_hierarchy: Иерархия проектов
   label_project_new: Новый проект
   label_project_plural: Программы
+  label_project_single: Программа
   label_project_settings: Настройки проекта
   label_projects_storage_information: "%{count} проектов используют %{storage} дискового
     пространства"
-  label_project_view_all: Просмотреть все проекты
+  label_project_view_all: Просмотреть все программы
   label_project_show_details: Показать детали проекта
   label_project_hide_details: Скрыть детали проекта
   label_public_projects: Проекты, доступные всем

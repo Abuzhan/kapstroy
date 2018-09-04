@@ -22,7 +22,7 @@
             aria: {label: t(:label_project_new)},
             title: t(:label_project_new)} do %>
       <%= op_icon('button--icon icon-add') %>
-      <span class="button--text"><%= Project.model_name.human %></span>
+      <span class="button--text"><%= l(:label_project_single) %></span>
     <% end %>
   <% end %>
   <%= link_to l(:label_project_view_all), projects_path,

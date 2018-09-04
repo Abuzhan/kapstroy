@@ -229,11 +229,11 @@ Redmine::MenuManager.map :project_menu do |menu|
             if: Proc.new { |p| p.module_enabled?('activity') },
             icon: 'icon2 icon-checkmark'
 
-  menu.push :roadmap,
-            { controller: '/versions', action: 'index' },
-            param: :project_id,
-            if: Proc.new { |p| p.shared_versions.any? },
-            icon: 'icon2 icon-roadmap'
+  # menu.push :roadmap,
+  #           { controller: '/versions', action: 'index' },
+  #           param: :project_id,
+  #           if: Proc.new { |p| p.shared_versions.any? },
+  #           icon: 'icon2 icon-roadmap'
 
   menu.push :work_packages,
             { controller: '/work_packages', action: 'index' },
