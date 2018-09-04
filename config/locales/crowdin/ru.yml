@@ -153,7 +153,7 @@ ru:
     edit:
       settings: Параметры
       form_configuration: Настройка форм
-      projects: Проекты
+      projects: Программы
       enabled_projects: Доступные проекты
       add_group: Добавить группу
       reset: Восстановить значения по умолчанию
@@ -403,7 +403,7 @@ ru:
         responsible: Ответственный
         spent_hours: Затраченное время
         spent_time: Затраченное время
-        subproject: Подпроект
+        subproject: Договор
         time_entries: Учет времени
         type: Тип
         watcher: Наблюдатель
@@ -1428,7 +1428,7 @@ ru:
   label_product_version: Версия продукта
   label_professional_support: Профессиональная поддержка
   label_profile: Профиль
-  label_project_all: Все проекты
+  label_project_all: Все Программы
   label_project_count: Общее количество проектов
   label_project_copy_notifications: Уведомлять по электронной почте по ходу копирования
     проекта

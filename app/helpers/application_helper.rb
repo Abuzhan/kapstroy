@@ -408,7 +408,7 @@ module ApplicationHelper
 
   def html_title(*args)
     title = []
-
+    puts(args)
     if args.empty?
       title << h(@project.name) if @project
       title += @html_title if @html_title

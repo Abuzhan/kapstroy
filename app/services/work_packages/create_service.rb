@@ -52,6 +52,9 @@ class WorkPackages::CreateService
   protected
 
   def create(attributes, work_package)
+
+    puts("CREATE DEF")
+
     result = set_attributes(attributes, work_package)
 
     result.success &&= work_package.save
@@ -66,6 +69,58 @@ class WorkPackages::CreateService
       result.success = false
     end
 
+    if work_package.attributes['type_id'] == 3
+      wp_model = ActionController::Parameters.new({
+                  work_package: {
+                    status_id: 1,
+                    priority_id: 8, 
+                    author_id: 1, 
+                    lock_version: 0, 
+                    done_ratio: 0,
+                    type_id: 5, 
+                    position: 1
+                }
+            })
+      
+      parent_id = work_package.attributes['id']
+      project_id = work_package.attributes['project_id']
+      project = Project.find(project_id)
+      wp_due_date = work_package.attributes['due_date']
+      d_d = wp_due_date
+      wp_start_date = work_package.attributes['start_date']
+      s_d = wp_start_date
+      
+      if wp_start_date.mday < 11
+        s_d = s_d.at_beginning_of_month
+      elsif wp_start_date.mday < 21
+        s_d = s_d.at_beginning_of_month + 10
+      else
+        s_d = s_d.at_beginning_of_month + 20
+      end
+      if wp_due_date.mday < 11
+        d_d = d_d.at_beginning_of_month + 9
+      elsif wp_due_date.mday < 21
+        d_d = d_d.at_beginning_of_month + 19
+      else
+        d_d = d_d.at_beginning_of_month.next_month - 1 
+      end
+      versions = project.versions.where("start_date >= ?", s_d)
+                                  .where("effective_date <= ?", d_d)
+                                  .order(:id)
+      versions.each do |version|
+        start_date = version['start_date']
+        due_date = version['effective_date']
+        puts(start_date)
+        fixed_version_id = version['id']
+        subject = version['name'] + " " + work_package['subject']
+        permitted = wp_model.require(:work_package).permit([:status_id, :type_id, :priority_id, :author_id, :lock_version, :done_ratio, :position]).merge(parent_id: parent_id, subject: subject, project_id: project_id, due_date: due_date, start_date: start_date, fixed_version_id: fixed_version_id)
+        test_wp = WorkPackage.new
+        test_wp.attributes = permitted
+        test_wp.save
+        puts(test_wp)
+      end
+      puts(versions.count)
+    end
     result
   end
 
