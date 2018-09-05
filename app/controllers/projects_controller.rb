@@ -178,7 +178,7 @@ class ProjectsController < ApplicationController
         end
 
         #Declaring some constants before generating rest of decades
-        if (project_end_date.year != project_start_date.year) && (project_end_date.month != project_start_date.month)
+        if (project_end_date.year != project_start_date.year) || (project_end_date.month != project_start_date.month)
           months_between = (project_end_date.year*12 + project_end_date.month) - (project_start_date.year*12 + project_start_date.month) - 1
           total_decades_so_far = decs_in_first + months_between * 3
           decade_counter = decs_in_first + 1
@@ -269,9 +269,6 @@ class ProjectsController < ApplicationController
         end
       end
     end
-    puts(version_save_success)
-    puts(project_save_success)
-    puts(validate_parent_id)
     if validate_parent_id && project_save_success && version_save_success
       @project.set_allowed_parent!(params['project']['parent_id']) if params['project'].has_key?('parent_id')
       add_current_user_to_project_if_not_admin(@project)

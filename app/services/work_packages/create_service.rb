@@ -53,8 +53,6 @@ class WorkPackages::CreateService
 
   def create(attributes, work_package)
 
-    puts("CREATE DEF")
-
     result = set_attributes(attributes, work_package)
 
     result.success &&= work_package.save
@@ -107,19 +105,17 @@ class WorkPackages::CreateService
       versions = project.versions.where("start_date >= ?", s_d)
                                   .where("effective_date <= ?", d_d)
                                   .order(:id)
-      versions.each do |version|
+      versions.reverse_each do |version|
         start_date = version['start_date']
         due_date = version['effective_date']
-        puts(start_date)
         fixed_version_id = version['id']
         subject = version['name'] + " " + work_package['subject']
-        permitted = wp_model.require(:work_package).permit([:status_id, :type_id, :priority_id, :author_id, :lock_version, :done_ratio, :position]).merge(parent_id: parent_id, subject: subject, project_id: project_id, due_date: due_date, start_date: start_date, fixed_version_id: fixed_version_id)
+        permitted = wp_model.require(:work_package).permit([:status_id, :type_id, :priority_id, :author_id, :lock_version, :done_ratio, :position])
+                                                   .merge(parent_id: parent_id, subject: subject, project_id: project_id, due_date: due_date, start_date: start_date, fixed_version_id: fixed_version_id)
         test_wp = WorkPackage.new
         test_wp.attributes = permitted
         test_wp.save
-        puts(test_wp)
       end
-      puts(versions.count)
     end
     result
   end
