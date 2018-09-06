@@ -68,7 +68,7 @@ class WorkPackages::CreateService
     end
 
     if work_package.attributes['type_id'] == 3
-      wp_model = ActionController::Parameters.new({
+      wp_model_epic = ActionController::Parameters.new({
                   work_package: {
                     status_id: 1,
                     priority_id: 8, 
@@ -76,6 +76,17 @@ class WorkPackages::CreateService
                     lock_version: 0, 
                     done_ratio: 0,
                     type_id: 5, 
+                    position: 1
+                }
+            })
+      wp_model_task = ActionController::Parameters.new({
+                  work_package: {
+                    status_id: 1,
+                    priority_id: 8, 
+                    author_id: 1, 
+                    lock_version: 0, 
+                    done_ratio: 0,
+                    type_id: 1, 
                     position: 1
                 }
             })
@@ -108,13 +119,24 @@ class WorkPackages::CreateService
       versions.reverse_each do |version|
         start_date = version['start_date']
         due_date = version['effective_date']
+        days_count = due_date.mday - start_date.mday
         fixed_version_id = version['id']
         subject = version['name'] + " " + work_package['subject']
-        permitted = wp_model.require(:work_package).permit([:status_id, :type_id, :priority_id, :author_id, :lock_version, :done_ratio, :position])
+        permitted = wp_model_epic.require(:work_package).permit([:status_id, :type_id, :priority_id, :author_id, :lock_version, :done_ratio, :position])
                                                    .merge(parent_id: parent_id, subject: subject, project_id: project_id, due_date: due_date, start_date: start_date, fixed_version_id: fixed_version_id)
-        test_wp = WorkPackage.new
-        test_wp.attributes = permitted
-        test_wp.save
+        wp_epic = WorkPackage.new
+        wp_epic.attributes = permitted
+        wp_epic.save
+        parent_id1 = wp_epic.attributes['id']
+        for i in 0..days_count
+          date = start_date + i
+          subject1 = "Отчет за " + date.strftime("%d/%m/%Y")
+          permitted1 = wp_model_task.require(:work_package).permit([:status_id, :type_id, :priority_id, :author_id, :lock_version, :done_ratio, :position])
+                                                   .merge(parent_id: parent_id1, subject: subject1, project_id: project_id, due_date: date, start_date: date)
+          wp_task = WorkPackage.new
+          wp_task.attributes = permitted1
+          wp_task.save
+        end
       end
     end
     result
