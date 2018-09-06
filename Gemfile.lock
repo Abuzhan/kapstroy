@@ -1,20 +1,19 @@
 GIT
+  remote: https://github.com/Abuzhan/kapstroy-backlogs.git
+  revision: 3bcbdadefd0debab226ba80ab9c65fa768e08b14
+  specs:
+    openproject-backlogs (7.4.7)
+      acts_as_silent_list (~> 3.0.0)
+      openproject-pdf_export (= 7.4.7)
+      rails (~> 5.0.0)
+
+GIT
   remote: https://github.com/dr0verride/RubyTree.git
   revision: 06f53ee78cc2a48377c1bd177d3bc83c1504701c
   ref: 06f53ee
   specs:
     rubytree (0.9.7)
       json (~> 1.8)
-
-GIT
-  remote: https://github.com/finnlabs/openproject-backlogs.git
-  revision: 274e8a4c1c22013fb0d563a4b942584f7bb2cd78
-  branch: stable/7
-  specs:
-    openproject-backlogs (7.4.7)
-      acts_as_silent_list (~> 3.0.0)
-      openproject-pdf_export (= 7.4.7)
-      rails (~> 5.0.0)
 
 GIT
   remote: https://github.com/finnlabs/openproject-pdf_export.git

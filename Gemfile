@@ -36,7 +36,7 @@ gem 'activerecord-session_store', '~> 1.1.0'
 gem 'rails', '~> 5.0.6'
 gem 'responders', '~> 2.4'
 
-gem "openproject-backlogs", git: "https://github.com/finnlabs/openproject-backlogs.git", :branch => 'stable/7'
+gem "openproject-backlogs", git: "https://github.com/Abuzhan/kapstroy-backlogs.git"
 gem "openproject-pdf_export", git: "https://github.com/finnlabs/openproject-pdf_export.git", :branch => 'stable/7'
 
 gem 'coderay', '~> 1.1.2'
