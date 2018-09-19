@@ -190,7 +190,7 @@ group :test do
   gem 'rspec', '~> 3.5.0'
   # also add to development group, so "spec" rake task gets loaded
   gem 'rspec-rails', '~> 3.5.2', group: :development
-  gem 'rspec-activemodel-mocks', '~> 1.0.3', git: 'https://github.com/rspec/rspec-activemodel-mocks'
+  #gem 'rspec-activemodel-mocks', '1.0.3', git: 'https://github.com/rspec/rspec-activemodel-mocks'
 
   # Retry failures within the same environment
   gem 'retriable', '~> 3.0'

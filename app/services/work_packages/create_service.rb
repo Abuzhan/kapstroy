@@ -57,6 +57,7 @@ class WorkPackages::CreateService
 
     result.success &&= work_package.save
 
+
     if result.success?
       result.merge!(reschedule_related(work_package))
 

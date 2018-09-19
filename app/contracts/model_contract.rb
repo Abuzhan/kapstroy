@@ -95,8 +95,8 @@ class ModelContract < Reform::Contract
     readonly_attributes_unchanged
     run_attribute_validations
 
-    #super
-    #model.valid?
+    super
+    model.valid?
 
     # We need to merge the contract errors with the model errors in
     # order to have them available at one place.
@@ -104,7 +104,7 @@ class ModelContract < Reform::Contract
     # among the model and its contract.
     errors.merge!(model.errors, [])
 
-    errors.empty?
+
   end
 
   # Methods required to get ActiveModel error messages working

@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/Abuzhan/kapstroy-backlogs.git
-  revision: 3bcbdadefd0debab226ba80ab9c65fa768e08b14
+  revision: 21e0838fee28e5ac605c9f051c3c49504a766204
   specs:
     openproject-backlogs (7.4.7)
       acts_as_silent_list (~> 3.0.0)
@@ -84,15 +84,6 @@ GIT
   specs:
     rails-angular-xss (0.3.0.pre.pre)
       rails (>= 5.0.0, < 5.1)
-
-GIT
-  remote: https://github.com/rspec/rspec-activemodel-mocks
-  revision: 3ab201ad091619bac1b2d8d990481b23e093b3b6
-  specs:
-    rspec-activemodel-mocks (1.0.3)
-      activemodel (>= 3.0)
-      activesupport (>= 3.0)
-      rspec-mocks (>= 2.99, < 4.0)
 
 GEM
   remote: https://rubygems.org/
@@ -296,7 +287,7 @@ GEM
     faker (1.9.1)
       i18n (>= 0.7)
     ffi (1.9.25)
-    fog-aws (3.0.0)
+    fog-aws (3.3.0)
       fog-core (~> 2.1)
       fog-json (~> 1.1)
       fog-xml (~> 0.1)
@@ -391,7 +382,7 @@ GEM
     mysql2 (0.4.10)
     net-ldap (0.16.1)
     netrc (0.11.0)
-    newrelic_rpm (5.3.0.346)
+    newrelic_rpm (5.4.0.347)
     nio4r (2.3.1)
     nokogiri (1.8.4)
       mini_portile2 (~> 2.3.0)
@@ -445,7 +436,7 @@ GEM
       rack (>= 0.4)
     rack-attack (5.0.1)
       rack
-    rack-protection (2.0.3)
+    rack-protection (2.0.4)
       rack
     rack-test (0.6.3)
       rack (>= 1.0)
@@ -540,7 +531,7 @@ GEM
     rspec-retry (0.5.7)
       rspec-core (> 3.3)
     rspec-support (3.5.0)
-    rubocop (0.58.2)
+    rubocop (0.59.1)
       jaro_winkler (~> 1.5.1)
       parallel (~> 1.10)
       parser (>= 2.5, != 2.5.1.1)
@@ -729,7 +720,6 @@ DEPENDENCIES
   retriable (~> 3.0)
   roar (~> 1.1.0)
   rspec (~> 3.5.0)
-  rspec-activemodel-mocks (~> 1.0.3)!
   rspec-example_disabler!
   rspec-legacy_formatters (~> 1.0.1)
   rspec-rails (~> 3.5.2)
