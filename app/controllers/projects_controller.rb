@@ -269,13 +269,23 @@ class ProjectsController < ApplicationController
         end
       end
     end
-    if validate_parent_id && project_save_success && version_save_success
-      @project.set_allowed_parent!(params['project']['parent_id']) if params['project'].has_key?('parent_id')
+
+    if validate_parent_id && project_save_success && version_save_success 
+      @project.set_allowed_parent!(params['project']['parent_id'])
       add_current_user_to_project_if_not_admin(@project)
-      respond_to do |format|
-        format.html do
-          flash[:notice] = l(:notice_successful_create)
-          redirect_work_packages_or_overview
+      if params['project'].has_key?('parent_id') && params['project']['parent_id'] != ""
+        respond_to do |format|
+          format.html do
+            flash[:notice] = l(:notice_successful_create)
+            redirect_work_packages_or_overview
+          end
+        end
+      else
+        respond_to do |format|
+          format.html do
+            flash[:notice] = l(:notice_successful_create)
+            redirect_settings_or_overview
+          end
         end
       end
     else
@@ -457,6 +467,12 @@ class ProjectsController < ApplicationController
 
   def redirect_work_packages_or_overview
     return if redirect_to_project_menu_item(@project, :work_packages)
+
+    redirect_to controller: '/projects', action: 'show', id: @project
+  end
+
+  def redirect_settings_or_overview
+    return if redirect_to_project_menu_item(@project, :settings)
 
     redirect_to controller: '/projects', action: 'show', id: @project
   end
