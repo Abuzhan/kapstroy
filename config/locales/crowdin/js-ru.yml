@@ -349,13 +349,13 @@ ru:
           assigned_to: Назначенный
           type: Тип
           due_date: Дате окончания
-          name: Имя
+          name: Наименование
           status: Состояние
           responsible: Ответственный
           start_date: Дата начала
         grouping_other: Другие
         noneSelection: "(нет)"
-      name: Имя
+      name: Наименование
       new_work_package: Новый пакет работ
       outline: Сбросить схему
       outlines:
@@ -574,7 +574,7 @@ ru:
       search_query_title: Кликните для поиска сохраненного фильтра запросов
     modals:
       label_settings: Переименовать запрос
-      label_name: Имя
+      label_name: Наименование
       label_delete_page: Удалить текущую страницу
       button_apply: Применить
       button_save: Сохранить
