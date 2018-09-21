@@ -314,7 +314,7 @@ ru:
       project:
         identifier: Идентификатор
         latest_activity_at: Последняя активность
-        parent: Договор
+        parent: Программа
         project_type: Тип программы
         queries: Запросы
         responsible: Ответственный
@@ -636,7 +636,7 @@ ru:
     lastname: Фамилия
     login: Входное имя
     mail: Электронная почта
-    name: Имя
+    name: Наименование
     password: Пароль
     priority: Приоритет
     project: Программа
@@ -1435,7 +1435,7 @@ ru:
   label_project_latest: Последние программы
   label_project_default_type: Разрешить пустой тип
   label_project_hierarchy: Иерархия программ
-  label_project_new: Новая программа
+  label_project_new: Заполните данные
   label_project_plural: Программы
   label_project_single: Программа
   label_project_settings: Настройки программы
