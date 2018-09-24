@@ -122,6 +122,7 @@ export class WorkPackageSingleViewController {
             members: this.getFields(resource, groups[1])
           };
         });
+
       });
   }
 

@@ -54,6 +54,7 @@ module Type::AttributeGroups
         people: :label_people,
         estimates_and_time: :label_estimates_and_time,
         details: :label_details,
+        tubes: :label_tubes,
         other: :label_other
       }
     end

@@ -1541,6 +1541,7 @@ ru:
   label_type_new: Новый тип
   label_type_plural: Типы
   label_type_default_new_projects: Тип активируется в новых программах по умолчанию
+  label_tubes: Трубы
   label_ui: Интерфейс пользователя
   label_update_work_package_done_ratios: Обновить работу созданными коэффициентами
   label_updated_time: Обновлено %{value} назад
