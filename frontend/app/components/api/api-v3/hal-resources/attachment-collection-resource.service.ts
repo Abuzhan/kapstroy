@@ -42,6 +42,8 @@ export class AttachmentCollectionResource extends CollectionResource {
    * Upload the given files to the $href property of this resource.
    */
   public upload(files: UploadFile[]): UploadResult {
+    console.log(files);
+    console.log(this.$href);
     return opFileUpload.upload(this.$href as string, files);
   }
 }

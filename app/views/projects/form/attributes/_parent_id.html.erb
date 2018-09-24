@@ -30,11 +30,13 @@ See doc/COPYRIGHT.rdoc for more details.
 <% project = form.object %>
 
 <% unless project.allowed_parents.compact.empty? %>
-  <div class="form--field">
-    <%= form.select :parent_id,
-                    project_tree_options_for_select(project.allowed_parents.compact,
-                                                    selected: project.parent),
-                    include_blank: project.allowed_parents.include?(nil),
-                    container_class: '-wide' %>
-  </div>
+  <% unless project.parent.blank? %>
+    <div class="form--field">
+      <%= form.select :parent_id,
+                      project_tree_options_for_select(project.allowed_parents.compact,
+                                                      selected: project.parent),
+                      include_blank: project.allowed_parents.include?(nil),
+                      container_class: '-wide' %>
+    </div>
+  <% end %>
 <% end %>
