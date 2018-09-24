@@ -1846,7 +1846,7 @@ ru:
     text_getting_started_description: Быстрый просмотр управления проектом и и команды
       сопровождения с OpenProject.
     text_show_again: Вы можете перезапустить это видео из меню «Справка»
-    welcome: Добро пожаловать в OpenProject
+    welcome: Добро пожаловать
   permission_add_work_package_notes: Добавить заметки
   permission_add_work_packages: Добавление работы (включет добавление к ним
     вложений)
