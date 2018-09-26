@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/Abuzhan/kapstroy-backlogs.git
-  revision: 21e0838fee28e5ac605c9f051c3c49504a766204
+  revision: 09cddbe69bf13d1b3ccc62eea02d8b7147030e2c
   specs:
     openproject-backlogs (7.4.7)
       acts_as_silent_list (~> 3.0.0)
