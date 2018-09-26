@@ -38,6 +38,8 @@ gem 'responders', '~> 2.4'
 
 gem "openproject-backlogs", git: "https://github.com/Abuzhan/kapstroy-backlogs.git"
 gem "openproject-pdf_export", git: "https://github.com/finnlabs/openproject-pdf_export.git", :branch => 'stable/7'
+gem 'openproject-documents', git: 'https://github.com/opf/openproject-documents.git', :branch => 'stable/7'
+gem "openproject-xls_export", git: "https://github.com/finnlabs/openproject-xls_export.git", :branch => "stable/7"
 
 gem 'coderay', '~> 1.1.2'
 gem 'rubytree', git: 'https://github.com/dr0verride/RubyTree.git', ref: '06f53ee'
