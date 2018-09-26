@@ -481,6 +481,7 @@ ru:
       property_groups:
         details: Детали
         people: Люди
+        tubes: Трубы
         estimatesAndTime: Смета & время
         other: Другие
       properties:

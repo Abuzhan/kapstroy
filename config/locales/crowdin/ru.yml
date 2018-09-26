@@ -1541,6 +1541,7 @@ ru:
   label_type_new: Новый тип
   label_type_plural: Типы
   label_type_default_new_projects: Тип активируется в новых программах по умолчанию
+  label_tubes: Трубы
   label_ui: Интерфейс пользователя
   label_update_work_package_done_ratios: Обновить работу созданными коэффициентами
   label_updated_time: Обновлено %{value} назад
@@ -1845,7 +1846,7 @@ ru:
     text_getting_started_description: Быстрый просмотр управления проектом и и команды
       сопровождения с OpenProject.
     text_show_again: Вы можете перезапустить это видео из меню «Справка»
-    welcome: Добро пожаловать в OpenProject
+    welcome: Добро пожаловать
   permission_add_work_package_notes: Добавить заметки
   permission_add_work_packages: Добавление работы (включет добавление к ним
     вложений)
