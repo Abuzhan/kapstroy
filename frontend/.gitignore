@@ -11,3 +11,5 @@
 /tests/openproject-test-bundle.js
 /tests/openproject-main.css
 /tests/openproject-tests.css
+
+!*/node_modules/jquery-ui/ui/widgets/datepicker.js
